@@ -6,7 +6,7 @@ import { Idea } from '../../models/idea.model';
   templateUrl: './idea-details.component.html',
   styleUrl: './idea-details.component.css'
 })
-export class IdeasDetailsComponent implements OnInit{
+export class IdeaDetailsComponent implements OnInit{
   @Input() viewMode:boolean = false;
 
   @Input() currentIdea?: Idea = {

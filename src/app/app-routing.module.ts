@@ -5,7 +5,7 @@ import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { AddIdeaComponent } from './components/add-idea/add-idea.component';
 import { IdeasListComponent } from './components/ideas-list/ideas-list.component';
-import { IdeasDetailsComponent } from './components/idea-details/idea-details.component';
+import { IdeaDetailsComponent } from './components/idea-details/idea-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'add', component: AddTodoComponent },
   { path: 'add-idea', component: AddIdeaComponent },
   { path: 'ideas', component: IdeasListComponent },
-  { path: 'ideas/:id', component: IdeasDetailsComponent },
+  { path: 'ideas/:id', component: IdeaDetailsComponent },
 ];
 
 @NgModule({

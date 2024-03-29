@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddIdeaComponent } from './components/add-idea/add-idea.component';
 import { IdeasListComponent } from './components/ideas-list/ideas-list.component';
-import { IdeasDetailsComponent } from './components/idea-details/idea-details.component';
+import { IdeaDetailsComponent } from './components/idea-details/idea-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { IdeasDetailsComponent } from './components/idea-details/idea-details.co
     TodosListComponent,
     AddIdeaComponent,
     IdeasListComponent,
-    IdeasDetailsComponent
+    IdeaDetailsComponent
   ],
   imports: [
     BrowserModule,
