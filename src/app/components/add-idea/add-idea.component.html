@@ -1,0 +1,33 @@
+<div>
+  <div class="submit-form">
+  @if(!submitted) {
+      <div class="form-group">
+        <label for = "name">Idea</label>
+        {{''// Use NGModel and two way property binding}}
+        <input class="form-control" type="text" name="name"
+        id="name"
+        [(ngModel)]="idea.name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <input class="form-control" type="text" name="description"
+        id="description"
+        required
+        [(ngModel)]="idea.description"
+        />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="addIdea()"
+        >Submit</button>
+      </div>
+
+  } @else {
+      <h4>Idea was submitted successfully!</h4>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="newIdea()">Add Idea</button>
+      </div>
+  }
+  </div>
+</div>

@@ -1,0 +1,77 @@
+@if (viewMode){
+  @if (currentTodo.id){
+  <h4>Todo</h4>
+  <div>
+    <label><strong>Name:</strong></label> {{ currentTodo.name }}
+  </div>
+  <div>
+    <label><strong>Description:</strong></label>
+    {{ currentTodo.description }}
+  </div>
+  <div>
+    <label><strong>Status:</strong></label>
+    {{ currentTodo.completed ? "Completed" : "Pending" }}
+  </div>
+
+  <a class="badge badge-warning" routerLink="/todos/{{currentTodo.id}}">
+    Edit
+  </a>
+  }
+  @else {<p>Please click on a Todo...</p>}
+} @else {
+  @if (currentTodo.id) {
+  <div class="edit-form">
+    <h4>Todo</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentTodo.name"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentTodo.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentTodo.completed ? "Completed" : "Pending" }}
+      </div>
+    </form>
+
+    @if (currentTodo.completed) {
+    <button class="badge badge-primary mr-2"
+      (click)="updateCompleted(false)" >
+      UnComplete
+    </button>
+    } @else {
+    <button class="badge badge-primary mr-2" (click)="updateCompleted(true)">
+      Complete
+    </button>
+    }
+
+    <button class="badge badge-danger mr-2" (click)="deleteTodo()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updateTodo()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  } @else {<p>{{currentTodo.id}} : Cannot access this Todo...</p>}
+}

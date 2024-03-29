@@ -1,0 +1,33 @@
+<div>
+  <div class="submit-form">
+    @if (!submitted) {
+    <div class="form-group">
+      <label for="name">Todo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        required
+        [(ngModel)]="todo.name"
+        name="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        class="form-control"
+        id="description"
+        required
+        [(ngModel)]="todo.description"
+        name="description"
+      />
+    </div>
+
+    <button (click)="saveTodo()" class="btn btn-success">Submit</button>
+    } @else {
+    <h4>Todo was submitted successfully!</h4>
+    <button class="btn btn-success" (click)="newTodo()">Add</button>
+    }
+  </div>
+</div>
