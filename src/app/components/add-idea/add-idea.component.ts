@@ -31,7 +31,7 @@ export class AddIdeaComponent {
   addIdea() {
     const data = {
       name: this.idea.name,
-      desciption: this.idea.description
+      description: this.idea.description
     }
     console.log(data)
     this.submitted = true; // get values from service and say submitted
