@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TaskEventEnvelope",
+  "type": "object",
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid" },
+    "traceId": { "type": "string" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "type": { "type": "string" },
+    "tenantId": { "type": "string" },
+    "aggregateId": { "type": "string" },
+    "payload": { "type": "object" }
+  },
+  "required": ["eventId","occurredAt","type","aggregateId"],
+  "examples": [
+    {
+      "eventId": "b1f3e6a8-...",
+      "traceId": "abc123",
+      "occurredAt": "2025-01-01T12:00:00Z",
+      "type": "task.created",
+      "aggregateId": "8a7d9f4e-...",
+      "payload": { "id": "8a7d9f4e-...", "title": "Write Chapter" }
+    }
+  ]
+}
