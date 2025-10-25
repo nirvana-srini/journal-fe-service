@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: Timer Service API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com
+components:
+  securitySchemes:
+    OIDC:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    IntervalPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        taskId:
+          type: string
+          format: uuid
+        focusDuration:
+          type: integer
+          description: seconds
+        shortBreakDuration:
+          type: integer
+          description: seconds
+        longBreakDuration:
+          type: integer
+          description: seconds
+        goalIntervals:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+    IntervalSession:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        planId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [focus,short_break,long_break]
+        scheduledStart:
+          type: string
+          format: date-time
+        actualStart:
+          type: string
+          format: date-time
+        actualEnd:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [scheduled,running,paused,completed,cancelled]
+        temporalWorkflowId:
+          type: string
+        startedByDeviceId:
+          type: string
+        metadata:
+          type: object
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
+security:
+  - OIDC: []
+paths:
+  /v1/plans:
+    post:
+      summary: Create an interval plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntervalPlan'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervalPlan'
+  /v1/sessions/start:
+    post:
+      summary: Start a session (idempotent via Idempotency-Key header)
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                planId:
+                  type: string
+                  format: uuid
+                scheduledStart:
+                  type: string
+                  format: date-time
+                deviceId:
+                  type: string
+      responses:
+        '201':
+          description: Session started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervalSession'
+        '409':
+          description: Conflict / Already started
+  /v1/sessions/{id}/pause:
+    post:
+      summary: Pause a running session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Paused
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervalSession'
+  /v1/sessions/{id}/complete:
+    post:
+      summary: Complete a session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                actualEnd:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervalSession'
+  /v1/sessions/{id}:
+    get:
+      summary: Get session
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntervalSession'
