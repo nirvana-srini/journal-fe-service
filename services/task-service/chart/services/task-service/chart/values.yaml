@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: srinivaspwd/deepfocus-task-service
+  tag: local-test
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+postgres:
+  host: pg-postgresql
+  user: postgres
+  password: postgres
+  db: taskdb
+
+kafka:
+  bootstrapServers: kafka-cluster-kafka-bootstrap.kafka:9092
+
+apicurio:
+  registryUrl: http://apicurio-apicurio-registry.apicurio:8080/apis/registry/v2
+
+oidc:
+  issuerUri: http://keycloak.keycloak/realms/deepfocus
+
+env:
+  JAVA_OPTS: "-Doutbox.poll-ms=0"
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
