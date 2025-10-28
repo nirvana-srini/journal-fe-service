@@ -21,6 +21,11 @@ public class TaskController {
         return ResponseEntity.status(201).body(t);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return ResponseEntity.ok(taskService.getAllTasks());
+    }
+
     @GetMapping("/{taskId}")
     public ResponseEntity<Task> getTask(@PathVariable UUID taskId) {
         return ResponseEntity.ok(taskService.getTask(taskId));

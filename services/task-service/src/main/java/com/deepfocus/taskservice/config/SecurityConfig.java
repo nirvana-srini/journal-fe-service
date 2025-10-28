@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authorize ->
                 authorize
-                    .requestMatchers("/actuator/health", "/actuator/prometheus", "/openapi/**").permitAll()
+                    .requestMatchers("/actuator/**", "/actuator/prometheus", "/openapi/**").permitAll()
                     .requestMatchers("/v1/tasks/**").authenticated()
                     .anyRequest().denyAll()
             )

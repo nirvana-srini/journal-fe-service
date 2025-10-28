@@ -3,6 +3,7 @@ package com.deepfocus.taskservice.application;
 import com.deepfocus.taskservice.domain.Task;
 import com.deepfocus.taskservice.infrastructure.OutboxMessage;
 import com.deepfocus.taskservice.infrastructure.OutboxRepository;
+import java.util.Map;
 import com.deepfocus.taskservice.infrastructure.TaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ public class TaskService {
         Task t = Task.create(title, description, tags, intervalPlanId);
         taskRepository.save(t);
 
-        String payload = String.format("{\\"event_type\\":\\"task.created\\",\\"task\\": {\\"id\\":\\"%s\\",\\"title\\":\\"%s\\"}}", t.getId(), t.getTitle());
-        OutboxMessage o = new OutboxMessage(t.getId(), "task", "task.events", t.getId().toString(), payload, "{}");
+        String payloadJson = String.format("{\"event_type\":\"task.created\",\"task\":{\"id\":\"%s\",\"title\":\"%s\"}}", t.getId(), t.getTitle());
+        Map<String, Object> payload = Map.of("event", payloadJson);  // Wrap the JSON string in a Map
+        Map<String, Object> headers = Map.of();  // Empty headers map
+        OutboxMessage o = new OutboxMessage(t.getId(), "task", "task.events", t.getId().toString(), payload, headers);
         outboxRepository.save(o);
 
         return t;
@@ -41,14 +44,24 @@ public class TaskService {
         t.update(title, description, tags);
         taskRepository.save(t);
 
-        String payload = String.format("{\\"event_type\\":\\"task.updated\\",\\"task\\": {\\"id\\":\\"%s\\",\\"title\\":\\"%s\\"}}", t.getId(), t.getTitle());
-        OutboxMessage o = new OutboxMessage(t.getId(), "task", "task.events", t.getId().toString(), payload, "{}");
+        Map<String, Object> payload = Map.of(
+            "event_type", "task.updated",
+            "task", Map.of(
+                "id", t.getId().toString(),
+                "title", t.getTitle()
+            )
+        );
+        OutboxMessage o = new OutboxMessage(t.getId(), "task", "task.events", t.getId().toString(), payload, Map.of());
         outboxRepository.save(o);
 
         return t;
     }
 
     public Task getTask(UUID id) {
-        return taskRepository.findById(id).orElseThrow();
+        return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 }

@@ -19,13 +19,15 @@ public class OutboxPublisher {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Scheduled(fixedDelayString = "${outbox.poll-ms:1000}")
+    @Scheduled(fixedDelayString = "5000")
     @Transactional
     public void publishPending() {
         List<OutboxMessage> pending = outboxRepository.findAndLockPending();
         for (OutboxMessage m : pending) {
             try {
-                kafkaTemplate.send(m.getTopic(), m.getKey(), m.getPayload()).get();
+                String payloadJson = objectMapper.writeValueAsString(m.getPayload());
+                kafkaTemplate.send(m.getTopic(), m.getKey(), payloadJson).get();
+                //kafkaTemplate.send(m.getTopic(), m.getKey(), m.getPayload()).get();
                 m.setStatus("SENT");
                 m.setSentAt(java.time.Instant.now());
                 outboxRepository.save(m);

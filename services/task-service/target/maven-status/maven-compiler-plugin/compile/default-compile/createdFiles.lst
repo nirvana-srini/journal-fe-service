@@ -1,0 +1,15 @@
+com/deepfocus/taskservice/infrastructure/OutboxMessage.class
+com/deepfocus/taskservice/adapters/rest/TaskController$UpdateTaskRequest.class
+com/deepfocus/taskservice/TaskServiceApplication.class
+com/deepfocus/taskservice/adapters/rest/TaskController$CreateTaskRequest.class
+com/deepfocus/taskservice/domain/Task.class
+com/deepfocus/taskservice/config/KafkaConfig.class
+com/deepfocus/taskservice/application/TaskService.class
+com/deepfocus/taskservice/infrastructure/TaskRepository.class
+com/deepfocus/taskservice/infrastructure/OutboxPublisher.class
+com/deepfocus/taskservice/infrastructure/JsonbConverter.class
+com/deepfocus/taskservice/infrastructure/IdempotencyRepository.class
+com/deepfocus/taskservice/infrastructure/OutboxRepository.class
+com/deepfocus/taskservice/config/SecurityConfig.class
+com/deepfocus/taskservice/infrastructure/IdempotencyEntry.class
+com/deepfocus/taskservice/adapters/rest/TaskController.class

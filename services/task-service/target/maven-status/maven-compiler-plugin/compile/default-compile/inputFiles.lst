@@ -1,0 +1,13 @@
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/application/TaskService.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/IdempotencyRepository.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/TaskRepository.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/config/SecurityConfig.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/OutboxPublisher.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/JsonbConverter.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/adapters/rest/TaskController.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/IdempotencyEntry.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/config/KafkaConfig.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/OutboxRepository.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/TaskServiceApplication.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/domain/Task.java
+/Users/sminigula/src/journal-fe-service/services/task-service/src/main/java/com/deepfocus/taskservice/infrastructure/OutboxMessage.java
